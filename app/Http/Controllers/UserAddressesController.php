@@ -1,0 +1,82 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\UserAddress;
+use App\Http\Requests\UserAddressRequest;
+
+class UserAddressesController extends Controller
+{
+    public function index(Request $request)
+    {
+    	return view('user_addresses.index', [
+    		'addresses' => $request->user()->addresses,
+    	]);
+    }
+
+    public function create() 
+    {
+    	return view('user_addresses.create_and_edit', [
+    		'address' => new UserAddress(),
+    	]);
+    }
+
+    public function store(UserAddressRequest $request)
+    {
+        $data= $request->only([
+            'province',
+            'city',
+            'district',
+            'address',
+            'zip',
+            'contact_name',
+            'contact_phone',
+        ]);
+
+        $user = $request->user();
+
+        // 添加地址
+        $user->addresses()->create($data);
+
+        return redirect()->route('user_addresses.index');
+    }
+
+    public function edit(UserAddress $user_address)
+    {
+        $this->authorize('own', $user_address);
+
+        return view('user_addresses.create_and_edit', [
+            'address' => $user_address,
+        ]);
+    }
+
+    public function update(UserAddress $user_address, UserAddressRequest $request)
+    {
+        $this->authorize('own', $user_address);
+
+        $data= $request->only([
+            'province',
+            'city',
+            'district',
+            'address',
+            'zip',
+            'contact_name',
+            'contact_phone',
+        ]);
+
+        $request->user()->update($data);
+
+        return redirect()->route('user_addresses.index')->with('success', '修改成功');
+    }
+
+    public function destroy(UserAddress $user_address)
+    {
+        $this->authorize('own', $user_address);
+        
+        $user_address->delete();
+
+        // return redirect()->route('user_addresses.index')->with('success', '删除成功');
+        return [];
+    }
+}
