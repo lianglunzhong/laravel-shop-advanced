@@ -230,4 +230,6 @@ return [
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
+    // 未支付订单关闭延迟时间（秒）
+    'order_ttl' => env('ORDER_TTL', 30 * 60),
 ];
