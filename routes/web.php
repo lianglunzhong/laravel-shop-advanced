@@ -46,6 +46,7 @@ Route::group([
 		Route::delete('cart/{sku}', 'CartController@remove')->name('cart.remove');
 		// 保存订单
 		Route::post('orders', 'OrdersController@store')->name('orders.store');
+		Route::get('orders', 'OrdersController@index')->name('orders.index');
 	});
 });
 
