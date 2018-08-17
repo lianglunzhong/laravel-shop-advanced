@@ -50,6 +50,10 @@ Route::group([
 		Route::get('orders', 'OrdersController@index')->name('orders.index');
 		// 订单详情
 		Route::get('orders/{order}', 'OrdersController@show')->name('orders.show');
+		// 支付宝支付
+		Route::get('payment/{order}/alipay', 'PaymentController@payByAlipay')->name('payment.alipay');
+		// 支付宝支付前端回调
+		Route::get('payment/alipay/return', 'PaymentController@alipayReturn')->name('payment.alipay.return');
 	});
 });
 
@@ -57,4 +61,6 @@ Route::group([
 Route::get('products', 'ProductsController@index')->name('products.index');
 // 产品详情
 Route::get('products/{product}', 'ProductsController@show')->name('products.show');
+// 支付宝支付服务器回调
+Route::post('payment/alipay/notify', 'PaymentController@alipayNotify')->name('payment.alipay.notify');
 
