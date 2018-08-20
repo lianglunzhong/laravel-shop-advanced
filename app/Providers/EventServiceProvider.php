@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use App\Events\OrderPaid;
+use App\Listeners\UpdateProductSoldCount;
+use App\Listeners\SendOrderPaidMail;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -19,6 +22,11 @@ class EventServiceProvider extends ServiceProvider
         // 用户注册成功之后事件监听器
         'Illuminate\Auth\Events\Registered' => [
             'App\Listeners\RegisteredListener',
+        ],
+        // 订单支付完成后的监听器
+        OrderPaid::class => [
+            UpdateProductSoldCount::class,
+            SendOrderPaidMail::class,
         ],
     ];
 
