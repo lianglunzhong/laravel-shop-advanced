@@ -15,5 +15,6 @@ Route::group([
     $router->get('users', 'UsersController@index');
     // 产品相关
     $router->resource('products', 'ProductsController');
-
+    // 订单列表
+    $router->get('orders', 'OrdersController@index')->name('admin.orders.index');
 });
