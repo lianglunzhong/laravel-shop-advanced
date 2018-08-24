@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Exceptions\InvalidRequestException;
 use Carbon\Carbon;
+use App\Events\OrderPaid;
 
 class PaymentController extends Controller
 {
@@ -35,7 +36,7 @@ class PaymentController extends Controller
     	// $data = app('alipay')->verify();
     	// dd($data);
     	try {
-    		app('alipay')->verigy();
+    		app('alipay')->verify();
     	} catch(\Exceptions $e) {
     		return view('pages.error', ['msg' => '数据不正确']);
     	}
