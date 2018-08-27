@@ -10,6 +10,7 @@ use App\Models\ProductSku;
 use App\Models\UserAddress;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\CouponCode;
 use Carbon\Carbon;
 use App\Exceptions\InvalidRequestException;
 use App\Jobs\CloseOrder;
@@ -25,8 +26,17 @@ class OrdersController extends Controller
         $address = UserAddress::find($request->address_id);
         $remark = $request->remark;
         $items = $request->items;
+        $coupon  = null;
 
-        $order = $orderService->store($user, $address, $remark, $items);
+        // 如果用户提交了优惠码
+        if ($code = $request->input('coupon_code')) {
+            $coupon = CouponCode::where('code', $code)->first();
+            if (!$coupon) {
+                throw new CouponCodeUnavailableException('优惠券不存在');
+            }
+        }
+
+        $order = $orderService->store($user, $address, $remark, $items, $coupon);
     	
     	return $order;
     }
