@@ -9,6 +9,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
+use Illuminate\Validation\Rule;
 
 class CouponCodesController extends Controller
 {
@@ -141,6 +142,7 @@ class CouponCodesController extends Controller
             // 如果 $form->model()->id 不为空，代表是编辑操作
             if ($id = $form->model()->id) {
                 return 'nullable|unique:coupon_codes,code,'.$id.',id';
+                // return ['nullable',Rule::unique('coupon_codes')->ignore($id)];
             } else {
                 return 'nullable|unique:coupon_codes';
             }

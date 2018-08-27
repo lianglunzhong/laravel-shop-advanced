@@ -62,6 +62,8 @@ Route::group([
         Route::post('orders/{order}/review', 'OrdersController@sendReview')->name('orders.review.store');
         // 提交退款申请
         Route::post('orders/{order}/apply_refund', 'OrdersController@applyRefund')->name('orders.apply_refund');
+        // 查看优惠券
+        Route::get('coupon_codes/{code}', 'CouponCodesController@show')->name('coupon_codes.show');
 	});
 });
 
