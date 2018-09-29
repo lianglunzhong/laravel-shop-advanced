@@ -38,7 +38,7 @@ class Category extends Model
 
     public function children()
     {
-    	return $this->hasMany(Category::class, 'parent_id');
+    	return $this->hasMany(Category::class, 'parent_id'); // Laravel 的默认外键并不是 表名_id，而是 方法名_id
     }
 
     public function products()
