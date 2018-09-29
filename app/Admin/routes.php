@@ -25,4 +25,8 @@ Route::group([
     $router->post('orders/{order}/refund', 'OrdersController@handleRefund')->name('admin.orders.handle_refund');
     // 优惠券相关
     $router->resource('coupon_codes', 'CouponCodesController');
+
+    // 类目相关
+    $router->resource('categories', 'CategoriesController', ['except' => ['show']]);
+    $router->get('api/categories', 'CategoriesController@apiIndex');
 });
