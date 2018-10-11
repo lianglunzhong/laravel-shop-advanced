@@ -27,6 +27,9 @@ Route::group([
     $router->resource('coupon_codes', 'CouponCodesController');
 
     // 类目相关
-    $router->resource('categories', 'CategoriesController', ['except' => ['show']]);
+    $router->resource('categories', 'CategoriesController', ['except' => ['show', 'destroy']]);
     $router->get('api/categories', 'CategoriesController@apiIndex');
+
+    // 众筹商品相关
+    $router->resource('crowdfunding_products', 'CrowdfundingProductsController', ['except' => ['show', 'destroy']]);
 });
