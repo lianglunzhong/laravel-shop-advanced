@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
 
             // 回调地址必须是完整的带有域名的 URL，不可以是相对路径。使用 route() 函数生成的 URL 默认就是带有域名的完整地址。
             // $config['notify_url'] = route('payment.alipay.notify');
-            $config['notify_url'] = 'http://requestbin.leo108.com/1640ry01';
+            $config['notify_url'] = ngrok_url('payment.alipay.notify');
             $config['return_url'] = route('payment.alipay.return');
 
             // 判断当前项目运行环境是否为线上环境
