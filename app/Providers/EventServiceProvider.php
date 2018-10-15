@@ -9,6 +9,7 @@ use App\Listeners\UpdateProductSoldCount;
 use App\Listeners\SendOrderPaidMail;
 use App\Events\OrderReviewd;
 use App\Listeners\UpdateProductRating;
+use App\Listeners\UpdateCrowdfundingProductProgress;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -29,6 +30,7 @@ class EventServiceProvider extends ServiceProvider
         OrderPaid::class => [
             UpdateProductSoldCount::class,
             SendOrderPaidMail::class,
+            UpdateCrowdfundingProductProgress::class,
         ],
         // 更新商品评价
         OrderReviewd::class => [
