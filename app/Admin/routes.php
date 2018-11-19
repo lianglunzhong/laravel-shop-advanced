@@ -32,4 +32,11 @@ Route::group([
 
     // 众筹商品相关
     $router->resource('crowdfunding_products', 'CrowdfundingProductsController', ['except' => ['show', 'destroy']]);
+
+    // 秒杀商品相关
+    $router->get('seckill_products', 'SeckillProductsController@index');
+    $router->get('seckill_products/create', 'SeckillProductsController@create');
+    $router->post('seckill_products', 'SeckillProductsController@store');
+    $router->get('seckill_products/{id}/edit', 'SeckillProductsController@edit');
+    $router->put('seckill_products/{id}', 'SeckillProductsController@update');
 });
