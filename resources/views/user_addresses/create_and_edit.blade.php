@@ -30,7 +30,7 @@
 						<form class="form-horizontal" role="form" action="{{ route('user_addresses.store') }}" method="post">
 					@endif
 						<!-- 引入 csrf token 字段 -->
-						{{ csrf_token() }}
+						{{ csrf_field() }}
 
 						<!-- inline-template 代表通过内联方式引入组件 -->
 						<select-district :init-value="{{ json_encode([$address->province, $address->city, $address->district]) }}" @change="onDistrictChanged" inline-template>

@@ -76,6 +76,8 @@ Route::group([
         Route::get('installments/{installment}/alipay', 'InstallmentsController@payByAlipay')->name('installments.alipay');
         // 支付宝分期付款前端回调
         Route::get('installments/alipay/return', 'InstallmentsController@alipayReturn')->name('installments.alipay.return');
+        // 秒杀商品下单
+        Route::post('seckill_orders', 'OrdersController@seckill')->name('seckill_orders.store');
 	});
 });
 
